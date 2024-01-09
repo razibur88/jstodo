@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Class-33</title>
+  </head>
+  <body>
+    <div class="">
+      <input type="text" class="input" />
+      <button class="add">add</button>
+      <button class="update11">Update</button>
+
+      <ul class="list"></ul>
+    </div>
+    <script>
+      let input = document.querySelector(".input");
+      let add = document.querySelector(".add");
+      let list = document.querySelector(".list");
+      let update11 = document.querySelector(".update11");
+      let id;
+      let todo = [];
+      add.addEventListener("click", () => {
+        todo.push(input.value);
+        input.value = "";
+        addToTodo();
+      });
+
+      update11.addEventListener("click", () => {
+        todo[id] = input.value;
+        input.value = "";
+        addToTodo();
+      });
+      function addToTodo() {
+        list.innerHTML = "";
+        todo.map((item) => {
+          list.innerHTML += `<li>${item} <button class="update">Edit</button><button class='delete'>Delete</button></li>`;
+        });
+        let deleteone = document.querySelectorAll(".delete");
+        let updateone = document.querySelectorAll(".update");
+        let deletearr = Array.from(deleteone);
+        let updatearr = Array.from(updateone);
+        deletearr.map((data, index) => {
+          data.addEventListener("click", () => {
+            todo.splice(index, 1);
+            addToTodo();
+          });
+        });
+
+        updatearr.map((up, index) => {
+          up.addEventListener("click", () => {
+            input.value = todo[index];
+            id = index;
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
